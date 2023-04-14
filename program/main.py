@@ -10,15 +10,16 @@ from func_messaging import send_message
 # MAIN FUNCTION
 if __name__ == "__main__":
 
-    success = send_message("Mensagens funcionando perefeitamente")
-    print(success)
-    exit(1)
+    # Message on Start
+    success = send_message("Bot Launch successful")
+
     # Connect to client
     try:
         print("Conectando ao cliente")
         client = connect_dydx()
     except Exception as e:
         print("Erro de conexão ao cliente: ", e)
+        send_message("Erro de conexão ao cliente")
         exit(1)
 
     # Abort al  open positions
@@ -28,6 +29,7 @@ if __name__ == "__main__":
             close_orders = abort_all_positions(client)
         except Exception as e:
             print("Erro fechando todas as posições! ", e)
+            send_message(f"Erro fechando todas as posições {e}")
             exit(1)
 
     # Find Cointegrated Pairs
@@ -39,6 +41,7 @@ if __name__ == "__main__":
             df_market_prices = construct_market_prices(client)
         except Exception as e:
             print("Erro construindo os preços de mercado...", e)
+            send_message(f"Erro construindo os preços de mercado {e}")
             exit(1)
 
     while True:
@@ -50,6 +53,7 @@ if __name__ == "__main__":
                 manage_trade_exits(client)
             except Exception as e:
                 print("Erro saindo das posições ", e)
+                send_message(f"Erro saindo das posições {e}")
                 exit(1)
 
         # Place Trades for opening positions
@@ -59,4 +63,5 @@ if __name__ == "__main__":
                 open_positions(client)
             except Exception as e:
                 print("Erro trading pares! ", e)
+                send_message(f"Erro trading pares! {e}")
                 exit(1)
