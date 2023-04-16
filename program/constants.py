@@ -2,19 +2,19 @@ from dydx3.constants import API_HOST_GOERLI, API_HOST_MAINNET
 from decouple import config
 
 # !!!! SELECT MODE !!!!
-MODE = "PRODUCTION"
+MODE = "DEVELOPMENT"
 
 # Close all open positions and orders
 ABORT_ALL_POSITIONS = True
 
 # Find Cointegrated Pairs
-FIND_COINTEGRATED = False
+FIND_COINTEGRATED = True
 
 # Manage Exits
-MANAGE_EXITS = False
+MANAGE_EXITS = True
 
 # Place Trades
-PLACE_TRADES = False
+PLACE_TRADES = True
 
 # Resolution
 RESOLUTION = "1HOUR"
